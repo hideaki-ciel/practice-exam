@@ -9,6 +9,6 @@ export default (req, res) => {
     }, {
         name: "山田 三郎",
         email: "taro3@example.com"
-    }];
-    res.status(200).json(data);
+    }]
+    res.status(200).json(data)
 }
