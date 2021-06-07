@@ -1,12 +1,12 @@
 import React from 'react'
 import Header from './header'
-//import {main} from './main'
+import Main from './main'
 class App extends React.Component {
     render() {
         return(
             <div>
                 <Header />
-                {/* <Main /> */}
+                <Main />
                 {/* <footer /> */}
             </div>
         )
