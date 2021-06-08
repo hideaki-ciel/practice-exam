@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <meta charset="utf-8" />
+    <title>test.html</title>
+</header>
+
+<body>
+    <div>test</div>
+    <h2>模擬試験</h2>
+
+    <p>問題</p>
+    <input type="button" value="開始" onClick="starttimer()" /><br />
+    <input type="button" value="終了" onClick="endtimer()" /><br />
+
+    <div id="answer_list">解答欄　
+
+        <input type="radio" name="answer" value="1" class="" > ア</input>
+        <input type="radio" name="answer" value="2" class="" > イ</input>
+        <input type="radio" name="answer" value="3" class="" > ウ</input>
+        <input type="radio" name="answer" value="4" class="" > エ</input>
+    </div>
+    <div class="time_btn">
+        経過時間：<span id="exam_timer">0時間0分0秒</span>
+        
+    </div>
+    <script>
+        let sec = 0;
+        let min = 0;
+        let hour = 0;
+        var exam_time;
+
+        function timer() {
+            sec++;
+            if (sec > 59) {
+                min++;
+                sec = 0
+            }
+            if (min > 59) {
+                hour++;
+                min = 0
+            }
+
+            exam_timer.textContent = hour + "時間" + min + "分" + sec + "秒"   
+        }
+
+        function starttimer() {
+            exam_time = setInterval("timer()", 100);
+        }
+        function endtimer() {
+            clearInterval(exam_time);
+        }
+    </script>
+
+</body>
+
+</html>
