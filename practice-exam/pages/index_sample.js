@@ -8,15 +8,22 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const [examtitle, setText] = useState(null)
+  const [examid,setId] = useState(null)
   useEffect((id) => {
-    fetch('/api/exams')
+    fetch('/api/questions_sample')
+    query_txt = "select questions.id, questions_set_id, question_txt from questions where questions_set_id = 1"
       .then(res => res.json())
       .then(data => {
-        setText(data[id].questions_name)
+        id=Math.floor(Math.random() * data.length)//ランダム表示
+        //setText(data[id].questions_name)
+        setId(data[id].id)
       })
-      id=Math.floor(Math.random() * 5);
-      // id=Math.floor(Math.random() * data.length);
-      //id =0
+    // fetch('/api/questions_sample')
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     exam
+    //   })
+      
 
   }, [])
 
@@ -39,7 +46,7 @@ export default function Home() {
         </p>
 
         <p>
-          <strong>試験名</strong>： {examtitle}
+          <strong>試験名</strong>：{examid} ; {examtitle}
         </p>
 
       </main>
