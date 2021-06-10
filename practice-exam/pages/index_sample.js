@@ -6,23 +6,26 @@ import styles from '../styles/Home.module.css'
 //import { monokaiSublime } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 
+
 export default function Home() {
   const [examtitle, setText] = useState(null)
   const [examid,setId] = useState(null)
+  const [choice,setChoices] = useState(null)
   useEffect((id) => {
+    id=Math.floor(Math.random() * data.length)//ランダム表示
     fetch('/api/questions_sample')
-    query_txt = "select questions.id, questions_set_id, question_txt from questions where questions_set_id = 1"
       .then(res => res.json())
       .then(data => {
-        id=Math.floor(Math.random() * data.length)//ランダム表示
-        //setText(data[id].questions_name)
+        
+        setText(data[id].question_txt)
         setId(data[id].id)
       })
-    // fetch('/api/questions_sample')
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     exam
-    //   })
+      
+    fetch('/api/choices')
+      .then(res => res.json())
+      .then(data => {
+        setChoices(data[id].choice_txt)
+      })
       
 
   }, [])

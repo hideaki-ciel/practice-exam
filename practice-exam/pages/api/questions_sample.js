@@ -1,6 +1,6 @@
 import { Client } from 'pg'
 
-const exec_query = (query_txt) => {
+export default  async(req,res) => {
     const client = new Client({
         user: 'postgres',
         host: 'localhost',
@@ -9,11 +9,16 @@ const exec_query = (query_txt) => {
         port: 5432
     })
     client.connect()
-    const { rows: results } = await client.query(query_txt)
+    const cols = "*"
+    const exam_id = 1
+    const query_text = {
+        text: `select ${cols} from questions where questions_set_id = ${exam_id}`,
+    }
+    const { rows: results } = await client.query(query_text)
     return res.status(200).json(results)
 }
 
-export default exec_query
+//xport default exec_query
 
 // export default async (req, res) => {
 //     const client = new Client({
