@@ -9,24 +9,30 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const [examtitle, setText] = useState(null)
-  const [examid,setId] = useState(null)
-  const [choice,setChoices] = useState(null)
+  const [examid, setId] = useState(null)
+  const [choice, setChoices] = useState(null)
   useEffect((id) => {
-    id=Math.floor(Math.random() * data.length)//ランダム表示
-    fetch('/api/questions_sample')
+    id = Math.floor(Math.random() * data.length)//ランダム表示
+
+    fetch('/api/questions_sample/'+sql_str)
       .then(res => res.json())
       .then(data => {
-        
+
         setText(data[id].question_txt)
         setId(data[id].id)
       })
-      
+
     fetch('/api/choices')
       .then(res => res.json())
       .then(data => {
         setChoices(data[id].choice_txt)
       })
-      
+    // //選択肢の際に参考
+    // for (let i = 0; i < data.length; i++) {
+    //   document.write(data[i] + ",");
+    //   document.write("<BR>");
+    // }
+
 
   }, [])
 
@@ -45,7 +51,7 @@ export default function Home() {
 
         <p className={styles.description}>
           Next.js上でpostgresqlからデータ取得し、表示する例 <br />
- 
+
         </p>
 
         <p>
