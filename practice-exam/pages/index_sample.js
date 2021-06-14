@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+//参考URL：パラメータ送付https://qiita.com/syu_ikeda/items/52fbe7480b2b9a54db0c
+import { useRouter } from 'next/router';
+
 import styles from '../styles/Home.module.css'
 //import SyntaxHighlighter from 'react-syntax-highlighter';
 //import { monokaiSublime } from "react-syntax-highlighter/dist/cjs/styles/hljs";
