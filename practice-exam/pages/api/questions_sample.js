@@ -18,7 +18,7 @@ export default  async(req,res) => {
     return res.status(200).json(results)
 }
 
-//xport default exec_query
+//export default exec_query
 
 // export default async (req, res) => {
 //     const client = new Client({

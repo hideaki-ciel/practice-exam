@@ -14,27 +14,36 @@ export default function Home() {
   const [examtitle, setText] = useState(null)
   const [examid, setId] = useState(null)
   const [choice, setChoices] = useState(null)
-  useEffect((id) => {
-    id = Math.floor(Math.random() * data.length)//ランダム表示
+  const [choice_question, setChoice_question] = useState(null)
 
-    fetch('/api/questions_sample/'+sql_str)
+  useEffect((ids) => {
+    ids = Math.floor(Math.random() * 5)//ランダム表示
+
+    fetch('/api/questions_sample/')
       .then(res => res.json())
       .then(data => {
 
-        setText(data[id].question_txt)
-        setId(data[id].id)
+        setText(data[ids].question_txt)
+        setId(data[ids].id)
       })
 
-    fetch('/api/choices')
+    fetch('/api/choices/')
       .then(res => res.json())
       .then(data => {
-        setChoices(data[id].choice_txt)
+        var choi = document.getElementById('choice');
+        
+        const choice_set = data.filter(el => el.question_id === ids +1)
+        setChoice_question(choice_set[0].question_id)
+        choi.insertAdjacentHTML('beforeend',choice_set[0].question_id + '<br/>')
+        //配列フィルター参考URL：https://www.digitalocean.com/community/tutorials/js-array-search-methods-ja
+        for (let i= 0; i <choice_set.length; i++){
+          setChoices(choice_set[i].display_name)
+          choi.insertAdjacentHTML('beforeend',choice_set[i].display_name + '<br/>')
+        }
+        
+        
       })
-    // //選択肢の際に参考
-    // for (let i = 0; i < data.length; i++) {
-    //   document.write(data[i] + ",");
-    //   document.write("<BR>");
-    // }
+    
 
 
   }, [])
@@ -54,12 +63,24 @@ export default function Home() {
 
         <p className={styles.description}>
           Next.js上でpostgresqlからデータ取得し、表示する例 <br />
+          
+          
+
 
         </p>
 
-        <p>
-          <strong>試験名</strong>：{examid} ; {examtitle}
-        </p>
+        <div>
+          <div id="queston">問題：{examid} <br /> {examtitle} <br /></div>
+          <div id="choice">選択肢<br />
+          
+          </div>
+          <br />
+          <input type="radio" name="answer" value="1" ></input><label>ア</label><br />
+          <input type="radio" name="answer" value="2" ></input><label>イ</label><br />
+          <input type="radio" name="answer" value="3" ></input><label>ウ</label><br />
+          <input type="radio" name="answer" value="4" ></input><label>エ</label><br />
+          <button type="button" >回答</button>
+        </div>
 
       </main>
 
